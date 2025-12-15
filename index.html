@@ -1,11 +1,11 @@
-Index.html 
+html
 
 <!doctype html>
-<html lang="zh-Hans" data-lang="zh">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rex Ng | Real Estate + Renovation</title>
+  <title>Rex Ng | Real Estate Landing Page</title>
   <style>
     :root{
       --bg:#0b1220; --card:#121a2b; --text:#e7eefc; --muted:#a9b7d6; --line:#24304d;
@@ -13,114 +13,123 @@ Index.html
     }
     *{ box-sizing:border-box; }
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Microsoft YaHei", Arial;
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,"PingFang SC","Microsoft YaHei",Arial;
       background: radial-gradient(1200px 600px at 20% 0%, #1b2a5a 0%, var(--bg) 55%);
       color:var(--text);
     }
-    .wrap{ max-width:1100px; margin:0 auto; padding:24px 18px 60px; }
+    .wrap{ max-width:1100px; margin:0 auto; padding:22px 16px 60px; }
+
+    /* Safe language system: default shows ZH even if JS fails */
+    .lang-en{ display:none; }
+    html[data-lang="en"] .lang-en{ display:block; }
+    html[data-lang="en"] .lang-zh{ display:none; }
+
     .topbar{
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
       margin-bottom:12px;
     }
+    .hint{ color:var(--muted); font-size:13px; line-height:1.4; }
     .langbtn{
       border:1px solid var(--line);
       background:#0f1730; color:var(--text);
       padding:10px 12px; border-radius:12px; cursor:pointer;
       display:flex; gap:10px; align-items:center;
     }
-    .langdot{
+    .dot{
       width:10px; height:10px; border-radius:50%;
       background: linear-gradient(135deg,var(--accent),var(--accent2));
       display:inline-block;
     }
+
     header{
-      display:flex; gap:18px; align-items:center; padding:20px; border:1px solid var(--line);
-      background:rgba(18,26,43,.75); backdrop-filter: blur(8px); border-radius:16px;
+      display:flex; gap:18px; align-items:center;
+      padding:18px; border:1px solid var(--line);
+      background:rgba(18,26,43,.75); backdrop-filter: blur(8px);
+      border-radius:16px;
     }
     .avatar{
-      width:76px; height:76px; border-radius:18px;
+      width:74px; height:74px; border-radius:18px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       display:grid; place-items:center; font-weight:900; font-size:28px; color:#06101f;
       flex:0 0 auto;
     }
     h1{ margin:0; font-size:26px; }
-    .tag{ color:var(--muted); margin-top:6px; line-height:1.5; }
+    .tag{ margin-top:6px; color:var(--muted); line-height:1.5; }
+
     .grid{ display:grid; gap:14px; margin-top:14px; grid-template-columns: 1.15fr .85fr; }
     @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
     .card{
-      padding:18px; border:1px solid var(--line); background:rgba(18,26,43,.7);
+      padding:16px; border:1px solid var(--line);
+      background:rgba(18,26,43,.7);
       border-radius:16px;
     }
-    .card h2{ margin:0 0 10px; font-size:16px; letter-spacing:.3px; color:#d9e4ff; }
+    .card h2{ margin:0 0 10px; font-size:16px; letter-spacing:.2px; color:#d9e4ff; }
     p{ margin:0 0 10px; color:var(--muted); line-height:1.7; }
-    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
-    .chip{ padding:8px 10px; border-radius:999px; background:#0f1730; border:1px solid var(--line); color:#cfe0ff; font-size:13px; }
-    .list{ margin:0; padding-left:18px; color:var(--muted); line-height:1.7; }
     .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
     a.btn, button.btn{
       display:inline-block; padding:10px 12px; border-radius:12px;
-      border:1px solid var(--line); background:#0f1730; color:var(--text); text-decoration:none;
-      cursor:pointer;
+      border:1px solid var(--line); background:#0f1730; color:var(--text);
+      text-decoration:none; cursor:pointer;
     }
     a.btn:hover, button.btn:hover{ transform: translateY(-1px); }
-    .twoCol{ display:grid; gap:14px; grid-template-columns:1fr 1fr; }
-    @media (max-width:900px){ .twoCol{ grid-template-columns:1fr; } }
-    .kpi{
-      display:grid; gap:10px; grid-template-columns: repeat(3, 1fr);
-      margin-top:10px;
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      padding:8px 10px; border-radius:999px;
+      background:#0f1730; border:1px solid var(--line);
+      color:#cfe0ff; font-size:13px; cursor:pointer;
+      user-select:none;
     }
+    .chip.active{
+      border-color: rgba(110,231,255,.65);
+      box-shadow: 0 0 0 2px rgba(110,231,255,.12) inset;
+    }
+    .small{ font-size:12px; color:var(--muted); line-height:1.6; }
+    .divider{ height:1px; background:var(--line); opacity:.9; margin:12px 0; }
+
+    .kpi{ display:grid; gap:10px; grid-template-columns: repeat(3, 1fr); margin-top:10px; }
     @media (max-width:720px){ .kpi{ grid-template-columns:1fr; } }
-    .kpi .box{
-      border:1px solid var(--line); border-radius:14px; padding:12px; background:#0f1730;
-    }
-    .kpi .num{ font-size:20px; font-weight:900; }
-    .divider{ height:1px; background:var(--line); margin:12px 0; opacity:.9; }
-    footer{ margin-top:16px; color:var(--muted); font-size:12px; text-align:center; }
+    .kpi .box{ border:1px solid var(--line); border-radius:14px; padding:12px; background:#0f1730; }
+    .kpi .num{ font-size:18px; font-weight:900; }
 
-    /* language toggling */
-    [data-lang]{ display:block; }
-
-    /* enquiry cards */
-    .enqGrid{ display:grid; gap:10px; grid-template-columns:1fr 1fr; }
-    @media (max-width:820px){ .enqGrid{ grid-template-columns:1fr; } }
+    .enqGrid{ display:grid; gap:10px; grid-template-columns:1fr; }
     .enq{
       border:1px solid var(--line); border-radius:14px; padding:12px; background:#0f1730;
     }
-    .enq .title{ font-weight:800; margin-bottom:8px; }
-    .enq .row{ display:flex; gap:8px; flex-wrap:wrap; }
-    .small{ font-size:12px; color:var(--muted); line-height:1.6; margin-top:8px; }
+    .enq .title{ font-weight:900; margin-bottom:8px; }
+    footer{ margin-top:14px; text-align:center; color:var(--muted); font-size:12px; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <div class="topbar">
-      <div data-lang="zh" style="color:var(--muted)">地产型个人名片页 · 一键WhatsApp询问</div>
-      <div data-lang="en" style="color:var(--muted)">Real estate landing page · 1-tap WhatsApp enquiry</div>
+      <div class="hint lang-zh">成交型地产名片页 · 选公寓→一键WhatsApp询问</div>
+      <div class="hint lang-en">Real estate conversion page · Pick condos → 1-tap WhatsApp enquiry</div>
 
       <button class="langbtn" id="toggleLang" type="button">
-        <span class="langdot"></span>
-        <span data-lang="zh">English</span>
-        <span data-lang="en">中文</span>
+        <span class="dot"></span>
+        <span class="lang-zh">English</span>
+        <span class="lang-en">中文</span>
       </button>
     </div>
 
     <header>
       <div class="avatar">R</div>
-      <div>
+      <div style="width:100%">
         <h1>Rex Ng</h1>
 
-        <div class="tag" data-lang="en">
+        <div class="tag lang-zh">
+          房地产顾问 · Kuala Lumpur & Selangor<br/>
+          + 装修 / 定制柜（可选服务）
+        </div>
+        <div class="tag lang-en">
           Real Estate Consultant · Kuala Lumpur & Selangor<br/>
           + Renovation / Custom Cabinetry (optional)
         </div>
-        <div class="tag" data-lang="zh">
-          房地产顾问 · 吉隆坡 & 雪兰莪<br/>
-          + 装修 / 定制柜（可选服务）
-        </div>
 
-        <div class="btnrow" style="margin-top:12px">
-          <!-- Direct WhatsApp call -->
+        <div class="btnrow">
           <a class="btn" href="https://wa.me/601112289906" target="_blank" rel="noreferrer">WhatsApp 011-12289906</a>
           <a class="btn" href="https://wa.me/60173476621" target="_blank" rel="noreferrer">WhatsApp 017-3476621</a>
         </div>
@@ -130,231 +139,303 @@ Index.html
     <div class="grid">
       <!-- LEFT -->
       <section class="card">
-        <h2 data-lang="zh">快速介绍</h2>
-        <h2 data-lang="en">Quick intro</h2>
+        <h2 class="lang-zh">① 选择你想看的公寓（可多选）</h2>
+        <h2 class="lang-en">① Select condos (multi-select)</h2>
 
-        <p data-lang="zh">
-          我专注于 Kuala Lumpur & Selangor 的租房/买房协助：找房、筛选、带看、议价与合约跟进。
-          如果你也需要空间规划/定制柜/隐藏门，我也能一起帮你安排。
-        </p>
-        <p data-lang="en">
-          I focus on Kuala Lumpur & Selangor rental/buy support: sourcing, shortlisting, viewings, negotiation and tenancy process.
-          I can also assist with space planning & custom cabinetry if needed.
-        </p>
+        <div class="chips" id="condoChips">
+          <span class="chip" data-condo="TRX Residence">TRX Residence</span>
+          <span class="chip" data-condo="Pavilion Embassy">Pavilion Embassy</span>
+          <span class="chip" data-condo="Sky Suites">Sky Suites</span>
+          <span class="chip" data-condo="Eco Sky">Eco Sky</span>
+          <span class="chip" data-condo="Setia Eco Sky Residence">Setia Eco Sky</span>
+          <span class="chip" data-condo="Tuan Residency">Tuan Residency</span>
+          <span class="chip" data-condo="Lakeville Residence">Lakeville</span>
+          <span class="chip" data-condo="99 Residence">99 Residence</span>
+          <span class="chip" data-condo="Aradia Plaza">Aradia Plaza</span>
+          <span class="chip" data-condo="Expressionz Professional Suites">Expressionz</span>
+          <span class="chip" data-condo="K Residence">K Residence</span>
+        </div>
+
+        <div class="small lang-zh" style="margin-top:10px;">
+          已选：<span id="selectedZh">（未选择）</span>
+        </div>
+        <div class="small lang-en" style="margin-top:10px;">
+          Selected: <span id="selectedEn">(none)</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2 class="lang-zh">② 为什么找我</h2>
+        <h2 class="lang-en">② Why work with me</h2>
 
         <div class="kpi">
           <div class="box">
-            <div class="num">Fast</div>
-            <div data-lang="zh" style="color:var(--muted)">回复快</div>
-            <div data-lang="en" style="color:var(--muted)">Fast response</div>
+            <div class="num lang-zh">回复快</div>
+            <div class="num lang-en">Fast response</div>
+            <div class="small lang-zh">沟通不拖，效率带看</div>
+            <div class="small lang-en">No delays, efficient viewings</div>
           </div>
           <div class="box">
-            <div class="num">Clear</div>
-            <div data-lang="zh" style="color:var(--muted)">资料清楚</div>
-            <div data-lang="en" style="color:var(--muted)">Clear info</div>
+            <div class="num lang-zh">资料清晰</div>
+            <div class="num lang-en">Clear info</div>
+            <div class="small lang-zh">优缺点、预算、条款讲明白</div>
+            <div class="small lang-en">Pros/cons, budget & terms explained</div>
           </div>
           <div class="box">
-            <div class="num">Follow-up</div>
-            <div data-lang="zh" style="color:var(--muted)">跟进到位</div>
-            <div data-lang="en" style="color:var(--muted)">Strong follow-up</div>
+            <div class="num lang-zh">跟进到位</div>
+            <div class="num lang-en">Strong follow-up</div>
+            <div class="small lang-zh">谈价、资料、签约一步到位</div>
+            <div class="small lang-en">Negotiation → docs → signing</div>
           </div>
         </div>
 
         <div class="divider"></div>
 
-        <h2 data-lang="zh">主攻公寓</h2>
-        <h2 data-lang="en">Featured condos</h2>
+        <h2 class="lang-zh">租房流程（给租客看很加分）</h2>
+        <h2 class="lang-en">Rental flow (helps tenants decide faster)</h2>
 
-        <div class="twoCol">
-          <ul class="list">
-            <li>Tuan Residency</li>
-            <li>Lakeville Residence</li>
-            <li>Aradia Plaza</li>
-            <li>Eco Sky</li>
-            <li>Setia Eco Sky Residence</li>
-            <li>99 Residence</li>
-          </ul>
-          <ul class="list">
-            <li>Sky Suites</li>
-            <li>TRX Residence</li>
-            <li>Expressionz Professional Suites</li>
-            <li>Pavilion Embassy</li>
-            <li>K Residence</li>
-          </ul>
-        </div>
-
-        <div class="divider"></div>
-
-        <h2 data-lang="zh">带看/租房流程（给租客看很加分）</h2>
-        <h2 data-lang="en">Rental flow (helps tenants decide faster)</h2>
-
-        <ol class="list" data-lang="zh">
-          <li>告诉我：预算、入住日期、人数、宠物/车位、家具需求</li>
-          <li>我给你 shortlist（照片/视频/优缺点）</li>
+        <ol class="small lang-zh" style="padding-left:18px; margin:0;">
+          <li>发我：预算、入住日期、人数、宠物/车位、家具需求</li>
+          <li>我给 shortlist（照片/视频/优缺点）</li>
           <li>安排带看（可一次看多间）</li>
-          <li>确定单位 → 议价与提交租客资料</li>
-          <li>签约、交付押金、安排入住</li>
+          <li>确定单位 → 议价 + 提交租客资料</li>
+          <li>签约、押金、安排入住</li>
         </ol>
 
-        <ol class="list" data-lang="en">
-          <li>Share your budget, move-in date, pax, pets/parking, furnishing needs</li>
+        <ol class="small lang-en" style="padding-left:18px; margin:0;">
+          <li>Send budget, move-in date, pax, pets/parking, furnishing needs</li>
           <li>I shortlist units (pics/video + pros/cons)</li>
-          <li>Viewing arrangement (multiple units in one session)</li>
-          <li>Confirm unit → negotiate & submit tenant profile</li>
-          <li>Tenancy signing, deposit, move-in arrangement</li>
+          <li>Arrange viewings (multiple units per session)</li>
+          <li>Confirm → negotiate + submit tenant profile</li>
+          <li>Signing, deposit, move-in arrangement</li>
         </ol>
-
       </section>
 
       <!-- RIGHT -->
       <aside class="card">
-        <h2 data-lang="zh">一键 WhatsApp 询问（最重要）</h2>
-        <h2 data-lang="en">1-tap WhatsApp enquiries (most important)</h2>
+        <h2 class="lang-zh">一键 WhatsApp（会自动带上你选的公寓）</h2>
+        <h2 class="lang-en">1-tap WhatsApp (auto-includes selected condos)</h2>
 
         <div class="enqGrid">
           <div class="enq">
-            <div class="title" data-lang="zh">租房询问</div>
-            <div class="title" data-lang="en">Rental enquiry</div>
-            <div class="row">
-              <a class="btn" id="rentBtn1" target="_blank">Send (011)</a>
-              <a class="btn" id="rentBtn2" target="_blank">Send (017)</a>
+            <div class="title lang-zh">租房询问（Tenant）</div>
+            <div class="title lang-en">Rental enquiry (Tenant)</div>
+            <div class="btnrow">
+              <a class="btn" id="rent1" target="_blank">Send (011)</a>
+              <a class="btn" id="rent2" target="_blank">Send (017)</a>
             </div>
           </div>
 
           <div class="enq">
-            <div class="title" data-lang="zh">带看预约</div>
-            <div class="title" data-lang="en">Viewing request</div>
-            <div class="row">
-              <a class="btn" id="viewBtn1" target="_blank">Send (011)</a>
-              <a class="btn" id="viewBtn2" target="_blank">Send (017)</a>
+            <div class="title lang-zh">带看预约（Viewing）</div>
+            <div class="title lang-en">Viewing request</div>
+            <div class="btnrow">
+              <a class="btn" id="view1" target="_blank">Send (011)</a>
+              <a class="btn" id="view2" target="_blank">Send (017)</a>
             </div>
           </div>
 
           <div class="enq">
-            <div class="title" data-lang="zh">我要出租我的房子（屋主）</div>
-            <div class="title" data-lang="en">I’m a landlord (list my unit)</div>
-            <div class="row">
-              <a class="btn" id="landBtn1" target="_blank">Send (011)</a>
-              <a class="btn" id="landBtn2" target="_blank">Send (017)</a>
+            <div class="title lang-zh">我是屋主（我要出租我的单位）</div>
+            <div class="title lang-en">I’m a landlord (List my unit)</div>
+            <div class="btnrow">
+              <a class="btn" id="land1" target="_blank">Send (011)</a>
+              <a class="btn" id="land2" target="_blank">Send (017)</a>
             </div>
-          </div>
-
-          <div class="enq">
-            <div class="title" data-lang="zh">装修/定制柜咨询</div>
-            <div class="title" data-lang="en">Renovation / cabinetry</div>
-            <div class="row">
-              <a class="btn" id="renoBtn1" target="_blank">Send (011)</a>
-              <a class="btn" id="renoBtn2" target="_blank">Send (017)</a>
-            </div>
+            <div class="small lang-zh">（这个入口很重要：帮你拿更多 listing）</div>
+            <div class="small lang-en">(Great for getting more landlord listings)</div>
           </div>
         </div>
-
-        <p class="small" data-lang="zh">
-          💡 说明：客户点按钮就会自动带出一段格式化信息，你只需要回复与安排即可。
-        </p>
-        <p class="small" data-lang="en">
-          💡 Note: clients tap a button and WhatsApp opens with a pre-filled message (fast & tidy).
-        </p>
 
         <div class="divider"></div>
 
-        <h2 data-lang="zh">租客资料（你可以复制发给客户）</h2>
-        <h2 data-lang="en">Tenant profile checklist (copy & send)</h2>
+        <h2 class="lang-zh">租客资料（复制给我就能开始找房）</h2>
+        <h2 class="lang-en">Tenant profile (copy & send)</h2>
 
-        <ul class="list" data-lang="zh">
-          <li>姓名 / 国籍 / 职业 / 公司</li>
-          <li>入住人数 / 是否宠物 / 车位</li>
-          <li>预算范围 / 入住日期 / 想要全配或半配</li>
-          <li>近期收入证明（如需要）</li>
-        </ul>
-
-        <ul class="list" data-lang="en">
-          <li>Name / Nationality / Job / Company</li>
-          <li>Pax / Pets / Parking</li>
-          <li>Budget / Move-in date / Furnishing preference</li>
-          <li>Proof of income (if needed)</li>
-        </ul>
-
-      </aside>
-
-      <section class="card" style="grid-column:1/-1;">
-        <h2 data-lang="zh">想找这些公寓？（快捷选择）</h2>
-        <h2 data-lang="en">Looking for these condos? (quick pick)</h2>
-
-        <div class="chips">
-          <span class="chip">Tuan Residency</span>
-          <span class="chip">Lakeville</span>
-          <span class="chip">Aradia Plaza</span>
-          <span class="chip">Eco Sky</span>
-          <span class="chip">Setia Eco Sky</span>
-          <span class="chip">99 Residence</span>
-          <span class="chip">Sky Suites</span>
-          <span class="chip">TRX Residence</span>
-          <span class="chip">Expressionz</span>
-          <span class="chip">Pavilion Embassy</span>
-          <span class="chip">K Residence</span>
+        <div class="small lang-zh" style="white-space:pre-line;">
+姓名 / 国籍：
+职业 / 公司：
+入住人数：
+预算：RM
+入住日期：
+宠物：有/无
+车位：需要/不需要
+家具：全配/半配/空房
+想看的公寓：（可选）
         </div>
 
-        <p class="small" data-lang="zh">你也可以把这里改成你要主推的 5 个项目（更聚焦）。</p>
-        <p class="small" data-lang="en">You can reduce to your top 5 condos for stronger focus.</p>
-      </section>
+        <div class="small lang-en" style="white-space:pre-line;">
+Name / Nationality:
+Job / Company:
+Pax:
+Budget: RM
+Move-in date:
+Pets: Yes/No
+Parking: Needed/Not needed
+Furnishing: Fully/Partly/Empty
+Preferred condo(s): (optional)
+        </div>
+      </aside>
     </div>
 
     <footer>© <span id="y"></span> Rex Ng · Kuala Lumpur & Selangor</footer>
   </div>
 
   <script>
-    // Language toggle
+    // --- Settings ---
+    const WA1 = "601112289906";
+    const WA2 = "60173476621";
+
+    // Safe default language: ZH
     const root = document.documentElement;
-    root.setAttribute("data-lang", "zh"); // default
-    document.getElementById("toggleLang").addEventListener("click", () => {
-      const cur = root.getAttribute("data-lang") || "zh";
-      root.setAttribute("data-lang", cur === "zh" ? "en" : "zh");
-    });
+    if (!root.getAttribute("data-lang")) root.setAttribute("data-lang", "zh");
+
+    // Year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // WhatsApp helper
-    const n1 = "601112289906";
-    const n2 = "60173476621";
-    const enc = encodeURIComponent;
+    // Language toggle
+    document.getElementById("toggleLang").addEventListener("click", () => {
+      const cur = root.getAttribute("data-lang") === "en" ? "en" : "zh";
+      root.setAttribute("data-lang", cur === "zh" ? "en" : "zh");
+      refreshLinks();
+    });
 
-    const msg = {
-      rent_zh: "Hi Rex，我想租房。\n预算：RM \n入住日期：\n人数：\n是否宠物：\n车位需求：\n全配/半配：\n想看的公寓：\n（如有）工作/公司：",
-      rent_en: "Hi Rex, I'm looking to rent.\nBudget: RM \nMove-in date:\nPax:\nPets:\nParking:\nFurnishing: Fully/Partly\nPreferred condo(s):\n(Optional) Job/Company:",
+    // Condo multi-select
+    const selected = new Set();
+    const chipsWrap = document.getElementById("condoChips");
+    chipsWrap.addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
+      const name = chip.getAttribute("data-condo");
+      if (!name) return;
 
-      view_zh: "Hi Rex，我想预约带看。\n想看的公寓：\n日期：\n时间：\n人数：\n是否需要一次看多间：是/否",
-      view_en: "Hi Rex, I'd like to arrange a viewing.\nCondo(s):\nDate:\nTime:\nPax:\nMultiple units in one session: Yes/No",
+      if (selected.has(name)) {
+        selected.delete(name);
+        chip.classList.remove("active");
+      } else {
+        selected.add(name);
+        chip.classList.add("active");
+      }
+      renderSelected();
+      refreshLinks();
+    });
 
-      land_zh: "Hi Rex，我是屋主想出租我的单位。\n公寓/地址：\n户型：\n面积：\n家具：全配/半配/空房\n期望租金：RM \n可带看时间：\n（如有）照片/视频：",
-      land_en: "Hi Rex, I'm a landlord and want to rent out my unit.\nCondo/Address:\nLayout:\nSize:\nFurnishing: Fully/Partly/Empty\nAsking rent: RM \nViewing availability:\n(Optional) Photos/Videos:",
-
-      reno_zh: "Hi Rex，我想咨询装修/定制柜。\n地点/公寓：\n项目：定制柜/隐藏门/其他\n大概时间：\n预算范围：RM \n（如有）参考照片：",
-      reno_en: "Hi Rex, I'd like to enquire about renovation/custom cabinetry.\nLocation/Condo:\nScope: Cabinetry/Hidden door/Others\nTimeline:\nBudget range: RM \n(Optional) Reference photos:"
-    };
-
-    function pick(textZh, textEn){
-      return (root.getAttribute("data-lang") === "en") ? textEn : textZh;
+    function renderSelected(){
+      const arr = Array.from(selected);
+      document.getElementById("selectedZh").textContent = arr.length ? arr.join("、") : "（未选择）";
+      document.getElementById("selectedEn").textContent = arr.length ? arr.join(", ") : "(none)";
     }
-    function link(num, text){ return `https://wa.me/${num}?text=${enc(text)}`; }
 
-    // Buttons (follow current language)
+    function enc(s){ return encodeURIComponent(s); }
+    function waLink(num, text){ return `https://wa.me/${num}?text=${enc(text)}`; }
+
+    function condosLine(){
+      const arr = Array.from(selected);
+      if (!arr.length) return { zh:"（未选择）", en:"(none)" };
+      return { zh: arr.join("、"), en: arr.join(", ") };
+    }
+
+    function msgRent(){
+      const c = condosLine();
+      return {
+        zh:
+`Hi Rex，我想租房。
+想看的公寓：${c.zh}
+预算：RM
+入住日期：
+人数：
+宠物：有/无
+车位：需要/不需要
+家具：全配/半配/空房
+（如有）职业/公司：`,
+        en:
+`Hi Rex, I'm looking to rent.
+Preferred condo(s): ${c.en}
+Budget: RM
+Move-in date:
+Pax:
+Pets: Yes/No
+Parking: Needed/Not needed
+Furnishing: Fully/Partly/Empty
+(Optional) Job/Company:`
+      };
+    }
+
+    function msgViewing(){
+      const c = condosLine();
+      return {
+        zh:
+`Hi Rex，我想预约带看。
+想看的公寓：${c.zh}
+日期：
+时间：
+人数：
+是否一次看多间：是/否`,
+        en:
+`Hi Rex, I'd like to arrange a viewing.
+Condo(s): ${c.en}
+Date:
+Time:
+Pax:
+Multiple units in one session: Yes/No`
+      };
+    }
+
+    function msgLandlord(){
+      return {
+        zh:
+`Hi Rex，我是屋主想出租我的单位。
+公寓/地址：
+户型：
+面积：
+家具：全配/半配/空房
+期望租金：RM
+可带看时间：
+（如有）照片/视频：`,
+        en:
+`Hi Rex, I'm a landlord and want to rent out my unit.
+Condo/Address:
+Layout:
+Size:
+Furnishing: Fully/Partly/Empty
+Asking rent: RM
+Viewing availability:
+(Optional) Photos/Videos:`
+      };
+    }
+
+    function pick(zh, en){
+      return (root.getAttribute("data-lang") === "en") ? en : zh;
+    }
+
     function refreshLinks(){
-      document.getElementById("rentBtn1").href = link(n1, pick(msg.rent_zh, msg.rent_en));
-      document.getElementById("rentBtn2").href = link(n2, pick(msg.rent_zh, msg.rent_en));
+      const r = msgRent();
+      const v = msgViewing();
+      const l = msgLandlord();
 
-      document.getElementById("viewBtn1").href = link(n1, pick(msg.view_zh, msg.view_en));
-      document.getElementById("viewBtn2").href = link(n2, pick(msg.view_zh, msg.view_en));
+      document.getElementById("rent1").href = waLink(WA1, pick(r.zh, r.en));
+      document.getElementById("rent2").href = waLink(WA2, pick(r.zh, r.en));
 
-      document.getElementById("landBtn1").href = link(n1, pick(msg.land_zh, msg.land_en));
-      document.getElementById("landBtn2").href = link(n2, pick(msg.land_zh, msg.land_en));
+      document.getElementById("view1").href = waLink(WA1, pick(v.zh, v.en));
+      document.getElementById("view2").href = waLink(WA2, pick(v.zh, v.en));
 
-      document.getElementById("renoBtn1").href = link(n1, pick(msg.reno_zh, msg.reno_en));
-      document.getElementById("renoBtn2").href = link(n2, pick(msg.reno_zh, msg.reno_en));
+      document.getElementById("land1").href = waLink(WA1, pick(l.zh, l.en));
+      document.getElementById("land2").href = waLink(WA2, pick(l.zh, l.en));
     }
-    refreshLinks();
 
-    // Update links after language toggle
-    document.getElementById("toggleLang").addEventListener("click", refreshLinks);
+    // Init
+    renderSelected();
+    refreshLinks();
   </script>
 </body>
 </html>
+ 
+   
+   
+     
+
+     
+
+   
+        
+      
